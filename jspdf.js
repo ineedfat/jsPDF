@@ -1195,6 +1195,26 @@ function jsPDF(/** String */ orientation, /** String */ unit, /** String */ form
 		].join(' '))
 		return this
 	}
+    
+
+	API.cliprect = function (x, y, w, h) {
+	    out([
+        f2(x * k), f2((pageHeight - y) * k), f2(w * k), f2(-h * k), 're', 'W', 'n'
+	    ].join(' '));
+	    return this;
+	};
+
+	API.gsave = function () {
+	    out('q');
+	    return this;
+	};
+
+	API.grestore = function () {
+	    out('Q');
+	    return this;
+	};
+
+
 
 	/**
 	Adds a triangle to PDF

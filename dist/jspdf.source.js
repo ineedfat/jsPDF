@@ -1192,6 +1192,33 @@ function jsPDF(/** String */ orientation, /** String */ unit, /** String */ form
 		].join(' '))
 		return this
 	}
+    
+    /**
+	Adds a rectangle to PDF
+	
+	@param {Number} x Coordinate (in units declared at inception of PDF document) against left edge of the page
+	@param {Number} y Coordinate (in units declared at inception of PDF document) against upper edge of the page
+	@param {Number} w Width (in units declared at inception of PDF document) 
+	@param {Number} h Height (in units declared at inception of PDF document) 
+	@param {String} style (Defaults to active fill/stroke style) A string signalling if stroke, fill or both are to be applied.
+	@function
+	@returns {jsPDF}
+	@methodOf jsPDF#
+	@name rect
+	 */
+	API.clip = function (x, y, w, h, style) {
+	    var op = getStyle(style)
+	    out([
+			f2(x * k)
+			, f2((pageHeight - y) * k)
+			, f2(w * k)
+			, f2(-h * k)
+			, 'r'
+			, op
+	    ].join(' '))
+	    return this
+	}
+
 
 	/**
 	Adds a triangle to PDF
